@@ -1,18 +1,17 @@
 <template>
-<div class="tmpl">
+<div class="accounttmpl">
    这是login页面
 </div>  
 </template>
 
 <script>
- export default {
- data() {
- return{
- }
- },
- methods:{
- }
- }
+    export default {
+        data() {
+            return {}
+        },
+        methods: {}
+    }
 </script>
 <style scoped>
+
 </style>
