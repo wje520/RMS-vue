@@ -20,7 +20,7 @@
              <router-link to="/admin/goodsadd">
                 <el-button >新增</el-button>
              </router-link>
-             <el-button >删除</el-button>
+             <el-button @click='handleDelete'>删除</el-button>
         </el-col>
         <el-col :span='4' :offset="15">
             <el-input
@@ -94,7 +94,7 @@
             return {
                 list: [],
                 searchVal: '',
-                ids: '', //获取删除商品的id字符串,可不可以存到数组中？
+                ids: '', //获取删除商品的id字符串
                 currentPage: 1,
                 pageSize: 10,
                 total: 0
@@ -104,6 +104,25 @@
             this.getlist();
         },
         methods: {
+            handleDelete() {
+                if (this.ids.length <= 0) {
+                    return this.$message.error('请选择您要删除的数据');
+                }
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    //调接口，删除数据  注意后面拼接的参数是变量，要用加号连接    
+                    var url = '/admin/goods/del/' + this.ids;
+                    this.$http.get(url).then(res => {
+                        if (res.data.status == 1) {
+                            return this.$message.error(res.data.message);
+                        }
+                        this.getlist(); //删除之后刷新列表数据
+                    });
+                })
+            },
             toggleSelection() {
                 var rows = this.list //获取所有的row
                 if (rows) {
