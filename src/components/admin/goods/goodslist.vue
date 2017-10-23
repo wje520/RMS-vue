@@ -16,7 +16,7 @@
     <div class="operation">
          <el-row>
         <el-col :span='5'>
-             <el-button >全选</el-button>
+             <el-button @click='toggleSelection' >全选</el-button>
              <router-link to="/admin/goodsadd">
                 <el-button >新增</el-button>
              </router-link>
@@ -37,6 +37,7 @@
               <!-- 对应的单个字段填到prop中，同时传入多个字段使用template -->
              <el-table :data="list" height="400"  style="width: 100%" border @selection-change="getrows"
              :row-class-name="tableRowClassName"
+             ref='multipleTable'
              >
                  <el-table-column type='selection'  width="80"> </el-table-column>
                  <el-table-column label="标题" width=""> 
@@ -103,6 +104,16 @@
             this.getlist();
         },
         methods: {
+            toggleSelection() {
+                var rows = this.list //获取所有的row
+                if (rows) {
+                    rows.forEach(row => {
+                        this.$refs.multipleTable.toggleRowSelection(row);
+                    });
+                } else {
+                    this.$refs.multipleTable.clearSelection();
+                }
+            },
             sizeChange(pagesize) { //所传参数参照elementui
                 // console.log(pagesize)
                 this.pageSize = pagesize;
