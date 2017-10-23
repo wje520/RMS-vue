@@ -43,6 +43,12 @@
                 }
             }
         },
+        mounted() {
+            document.getElementsByTagName('body')[0].style.backgroundColor = '#267cb7';
+        },
+        beforeDestroy() {
+            document.getElementsByTagName('body')[0].style.backgroundColor = '#fff';
+        },
         methods: {
             resetForm(formref) {
                 this.$refs[formref].resetFields();
@@ -69,7 +75,5 @@
     }
 </script>
 <style scoped>
-    body {
-        background-color: #267cb7;
-    }
+
 </style>
