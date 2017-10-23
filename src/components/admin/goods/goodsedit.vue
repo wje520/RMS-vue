@@ -257,7 +257,8 @@
             submitForm(formref) {
                 this.$refs[formref].validate((valid) => {
                     if (valid) {
-                        var url = '/admin/goods/add/goods';
+                        var goodsid = this.$route.params.id;
+                        var url = '/admin/goods/edit/' + goodsid; //路径前面不能有空格
                         this.$http.post(url, this.form).then(res => {
                             if (res.data.status == 1) {
                                 this.$message.error(res.data.message);
