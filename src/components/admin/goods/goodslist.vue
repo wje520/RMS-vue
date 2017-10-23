@@ -72,7 +72,7 @@
     <template scope="scope">
         <!-- router-link相当于a标签，不用再另外加a标签了 -->
          <router-link v-bind="{to:'/admin/goodsedit/'+scope.row.id}">
-            <el-button type="info" size="mini" >修改</el-button>
+            <el-button type="info" size="mini" >编辑</el-button>
         </router-link>                   
   </template>
 </el-table-column>

@@ -7,7 +7,8 @@ import App from './App.vue';
 import layout from './components/admin/layout.vue';
 import login from './components/admin/account/login.vue';
 import goodslist from './components/admin/goods/goodslist.vue';
-import goodsadd from './components/admin/goods/goodsadd.vue'
+import goodsadd from './components/admin/goods/goodsadd.vue';
+import goodsedit from './components/admin/goods/goodsedit.vue';
 
 //导入elementUI
 import ElementUI from 'element-ui';
@@ -39,7 +40,8 @@ var router = new vueRouter({
             component: layout,
             children: [
                 { name: 'goodslist', path: 'goodslist', component: goodslist },
-                { name: 'goodsadd', path: 'goodsadd', component: goodsadd }
+                { name: 'goodsadd', path: 'goodsadd', component: goodsadd },
+                { name: 'goodsedit', path: 'goodsedit/:id', component: goodsedit }
             ]
         }
     ]
