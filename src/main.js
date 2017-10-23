@@ -18,26 +18,51 @@ import '../statics/css/site.css';
 // 绑定到vue对象上
 Vue.use(vueRouter);
 Vue.use(ElementUI);
+
+
 Vue.use(axios);
 
+//设定axios的参数使得axios发出的ajax请求能够自动带上cookie路由规则
+axios.defaults.withCredentials = true;
 axios.defaults.baseURL = 'http://157.122.54.189:9095';
 Vue.prototype.$http = axios;
 
-//定义路由规则
+
+
 var router = new vueRouter({
-        routes: [
-            { name: 'default', path: '/', redirect: '/admin' }, //配置根目录的默认跳转
-            { name: 'login', path: '/login', component: login },
-            {
-                name: 'layout',
-                path: '/admin',
-                component: layout,
-                children: [
-                    { name: 'goodslist', path: 'goodslist', component: goodslist },
-                    { name: 'goodsadd', path: 'goodsadd', component: goodsadd }
-                ]
-            }
-        ]
+    routes: [
+        { name: 'default', path: '/', redirect: '/admin' }, //配置根目录的默认跳转
+        { name: 'login', path: '/login', component: login },
+        {
+            name: 'layout',
+            path: '/admin',
+            component: layout,
+            children: [
+                { name: 'goodslist', path: 'goodslist', component: goodslist },
+                { name: 'goodsadd', path: 'goodsadd', component: goodsadd }
+            ]
+        }
+    ]
+});
+//路由钩子函数
+router.beforeEach((to, from, next) => {
+        // console.log(to); //当前要进入的路由
+        // console.log(from) // 代表来源路由
+        // console.log(next) //要执行一下 next()方法才能正常渲染出组件页面
+        if (to.name == 'login') {
+            next();
+        } else {
+            // 检查是否登录过
+            var url = '/admin/account/islogin';
+            axios.get(url).then(res => {
+                if (res.data.code == 'nologin') {
+                    // 注意router和$router的区别
+                    router.push({ name: 'login' })
+                } else {
+                    next()
+                }
+            })
+        }
     })
     //实例化vue
 new Vue({

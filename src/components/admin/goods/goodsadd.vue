@@ -114,7 +114,7 @@
                <el-row>
                    <el-col :span='22'>
                        <el-form-item label='内容摘要' prop='zhaiyao'>
-                           <el-input v-model='form.zhaiyao' placeholder='请输入摘要'></el-input>
+                           <el-input type='textarea' v-model='form.zhaiyao' placeholder='请输入摘要'></el-input>
                        </el-form-item>
                    </el-col>
                </el-row>
@@ -122,7 +122,7 @@
                <el-row>
                    <el-col :span='22'>
                        <el-form-item  label='详细内容' prop='content'>
-                           <quill-editor v-model='form.content' class="quill-editor"></quill-editor>
+                           <quill-editor v-model='form.content' ></quill-editor>
                        </el-form-item>
                    </el-col>
                </el-row>
@@ -130,8 +130,10 @@
                <el-row>
                    <el-col :span='24'>
                        <el-form-item >
-                            <el-button type="primary" @click="submitForm('form')">提交</el-button>
-                            <el-button @click="resetForm('form')">重置</el-button>
+                           <!-- 传入的是ref中的值：ref 被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 $refs 对象上。
+                            如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素；如果用在子组件上，引用就指向组件实例： -->
+                            <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+                            <el-button @click="resetForm('ruleForm')">重置</el-button>
                        </el-form-item>
                    </el-col>
                </el-row>
@@ -270,9 +272,5 @@
 <style scoped>
     .formTop {
         margin-top: 10px;
-    }
-    
-    .quill-editor {
-        /* height: 150px; */
     }
 </style>

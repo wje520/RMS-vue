@@ -151,14 +151,27 @@ a {
     margin-top: 10px;
 }
 
+;
 
 /*列表页面结束*/
 
-
+nm
 /*登录页面*/
 
 .accounttmpl .el-form-item__label {
-    color: #ffffff;
+    color: #fff;
+    position: relative;
+}
+
+.el-col-offset-8 {
+    margin-left: 33.33333%;
+    margin-top: 50px;
+}
+
+.accounttmpl img {
+    position: absolute;
+    top: 40px;
+    left: 490px;
 }
 
 
